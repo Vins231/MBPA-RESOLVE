@@ -1,0 +1,75 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile information",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["Admin", "Supervisor", "Technician", "Resident", "Maid"] },
+        "mobile": { "type": "string" },
+        "society": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "approved", "rejected"] },
+        "isApproved": { "type": "boolean" },
+        "flat": { "type": "string" },
+        "building": { "type": "string" },
+        "referenceCode": { "type": "string" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["uid", "name", "email", "role", "society", "status"]
+    },
+    "Complaint": {
+      "title": "Complaint",
+      "description": "Complaint information",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "complaintId": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string" },
+        "priority": { "type": "string", "enum": ["High", "Medium", "Low"] },
+        "status": { "type": "string", "enum": ["pending", "in-progress", "resolved"] },
+        "authorUid": { "type": "string" },
+        "authorName": { "type": "string" },
+        "society": { "type": "string" },
+        "createdAt": { "type": "number" },
+        "updatedAt": { "type": "number" },
+        "assignedTo": { "type": "string" },
+        "flat": { "type": "string" }
+      },
+      "required": ["id", "title", "status", "authorUid", "society"]
+    },
+    "TimelineEvent": {
+      "title": "TimelineEvent",
+      "description": "Timeline event for a complaint",
+      "type": "object",
+      "properties": {
+        "complaintId": { "type": "string" },
+        "eventId": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "authorName": { "type": "string" },
+        "createdAt": { "type": "number" },
+        "status": { "type": "string" }
+      },
+      "required": ["complaintId", "eventId", "title", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{uid}": {
+      "schema": "UserProfile",
+      "description": "User profiles"
+    },
+    "/complaints/{id}": {
+      "schema": "Complaint",
+      "description": "Complaints"
+    },
+    "/complaints/{id}/timeline/{eventId}": {
+      "schema": "TimelineEvent",
+      "description": "Timeline events for a complaint"
+    }
+  }
+}

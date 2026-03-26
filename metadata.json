@@ -1,0 +1,9 @@
+{
+  "name": "Mumbai Port Authority Resolve",
+  "description": "A smart complaint management system for the Mumbai Port Authority (MbPA), featuring resident registration, multi-step complaint submission, and real-time tracking.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ]
+}
